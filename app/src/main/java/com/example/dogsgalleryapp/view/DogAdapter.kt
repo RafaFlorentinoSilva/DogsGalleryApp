@@ -26,8 +26,7 @@ class DogAdapter(private var dogImages: List<DogResponse>) : RecyclerView.Adapte
 
     override fun getItemCount() = dogImages.size
 
-    // Este é o método que você precisa adicionar
-    fun updateDogs(newDogs: List<DogResponse>) {
+        fun updateDogs(newDogs: List<DogResponse>) {
         dogImages = newDogs
         notifyDataSetChanged()
     }
