@@ -1,12 +1,3 @@
-import java.io.FileInputStream
-import java.util.Properties
-
-val propertiesFile = rootProject.file("local.properties")
-val properties = Properties()
-if (propertiesFile.exists()) {
-    properties.load(FileInputStream(propertiesFile))
-}
-
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
@@ -32,12 +23,12 @@ android {
 
     buildTypes {
         release {
-            buildConfigField("String", "THE_DOG_API_KEY", properties.getProperty("theDogApiKey"))
-            buildConfigField("String", "BASE_URL", properties.getProperty("theDogApiBaseUrl"))
+            buildConfigField("String", "THE_DOG_API_KEY", "\"live_lpzcGFyLVHoRYAvgYpHsVbJ1kufozecXXS1k8bNofU6QJrk444tnymPunLI4muir\"")
+            buildConfigField("String", "BASE_URL","\"https://api.thedogapi.com/v1/\"")
         }
         debug {
-            buildConfigField("String", "THE_DOG_API_KEY", properties.getProperty("theDogApiKey"))
-            buildConfigField("String", "BASE_URL", properties.getProperty("theDogApiBaseUrl"))
+            buildConfigField("String", "THE_DOG_API_KEY","\"live_lpzcGFyLVHoRYAvgYpHsVbJ1kufozecXXS1k8bNofU6QJrk444tnymPunLI4muir\"")
+            buildConfigField("String", "BASE_URL", "\"https://api.thedogapi.com/v1/\"")
         }
     }
     compileOptions {
@@ -70,18 +61,17 @@ dependencies {
     androidTestImplementation(libs.androidx.ui.test.junit4)
     debugImplementation(libs.androidx.ui.tooling)
     debugImplementation(libs.androidx.ui.test.manifest)
-// Chamada de API e JSON
-    implementation("com.squareup.retrofit2:retrofit:2.9.0")
-    implementation("com.squareup.retrofit2:converter-gson:2.9.0")
-    implementation("androidx.recyclerview:recyclerview:1.2.1")
 
-// Carregamento de imagens
-    implementation("io.coil-kt:coil-compose:2.5.0") // Ou coil:coil se não for usar jetpack compose
+    implementation(libs.retrofit)
+    implementation(libs.converter.gson)
+    implementation(libs.androidx.recyclerview)
 
-// MVVM
-    implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.7.0")
-    implementation("androidx.lifecycle:lifecycle-livedata-ktx:2.7.0")
+    implementation(libs.coil.compose)
 
-// Coroutines
-    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.7.1")
+
+    implementation(libs.androidx.lifecycle.viewmodel.ktx)
+    implementation(libs.androidx.lifecycle.livedata.ktx)
+
+
+    implementation(libs.kotlinx.coroutines.android)
 }
